@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90 Days Challenge</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #eef3ff;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #18233b;
+    color: #8faaff;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 18px 0;
+}
+
+.subtitle {
+    color: #9eacc8;
+    line-height: 1.7;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.stat {
+    background: #121a2e;
+    border: 1px solid #263453;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 27px;
+    color: #6c8cff;
+    margin-bottom: 8px;
+}
+
+.stat span {
+    color: #9eacc8;
+    font-size: 13px;
+}
+
+.progress-card {
+    background: #121a2e;
+    padding: 20px;
+    border: 1px solid #263453;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.progress-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.progress-track {
+    background: #26314d;
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6c8cff, #35d39a);
+    transition: 0.3s;
+}
+
+.days-title {
+    margin: 30px 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.days-title h2 {
+    font-size: 22px;
+}
+
+button {
+    background: #18233b;
+    color: white;
+    border: 1px solid #3b4c70;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    border-color: #6c8cff;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.day {
+    background: #121a2e;
+    border: 1px solid #263453;
+    padding: 18px;
+    border-radius: 13px;
+    transition: 0.2s;
+}
+
+.day.done {
+    background: #122b2b;
+    border-color: #35d39a;
+}
+
+.day h3 {
+    font-size: 19px;
+    color: #8faaff;
+    margin-bottom: 17px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #263453;
+}
+
+.day.done h3 {
+    color: #35d39a;
+}
+
+.task {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    color: #dbe5ff;
+    font-size: 13px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.task input {
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    accent-color: #35d39a;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.task:has(input:checked) {
+    color: #35d39a;
+}
+
+.day-status {
+    display: block;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #263453;
+    color: #9eacc8;
+    font-size: 12px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 35px;
+    color: #9eacc8;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+@media(max-width: 850px) {
+    .days {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    .days {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stat {
+        padding: 15px 5px;
+    }
+
+    .stat strong {
+        font-size: 21px;
+    }
+
+    .stat span {
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <span class="tag">🔥 PERSONAL GROWTH • 90 DAYS</span>
+
+        <h1>🚀 90 Days Challenge</h1>
+
+        <p class="subtitle">
+            90 maalmood oo isbeddel iyo horumar ah.<br>
+            Maalin kasta dhammaystir hawlahaaga! 💪
+        </p>
+    </header>
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <strong id="completed">0</strong>
+            <span>✅ Maalmo la dhammaystiray</span>
+        </div>
+
+        <div class="stat">
+            <strong id="remaining">90</strong>
+            <span>⏳ Maalmo kuu haray</span>
+        </div>
+
+        <div class="stat">
+            <strong id="percent">0%</strong>
+            <span>📈 Horumarka guud</span>
+        </div>
+
+    </section>
+
+    <!-- PROGRESS BAR -->
+
+    <section class="progress-card">
+
+        <div class="progress-head">
+            <strong>🔥 Challenge Progress</strong>
+            <span id="progressText">0 / 90</span>
+        </div>
+
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+    </section>
+
+    <!-- 90 DAYS -->
+
+    <div class="days-title">
+
+        <h2>📅 90 Days Tracker</h2>
+
+        <button id="reset">🔄 Reset</button>
+
+    </div>
+
+    <section class="days" id="days"></section>
+
+    <p class="footer">
+        🔒 Your progress is saved automatically using LocalStorage.<br>
+        Keep going! Small steps every day create big results. 🚀
+    </p>
+
+</div>
+
+<script>
+
+// SETTINGS
+
+const TOTAL_DAYS = 90;
+
+const STORAGE_KEY = "90_days_challenge_progress";
+
+// DAILY TASKS
+
+const tasks = [
+
+    "🌅 Kicida xilli hore — 4:00 AM",
+
+    "📖 Aqrinta Qur'aanka — Hal Juz",
+
+    "🏋️ Jimicsiga jirka (Gym)",
+
+    "📵 Iska yareynta daawashada mobile-ka",
+
+    "😴 Seexashada waqti hore",
+
+    "💪 100 Push-ups, 100 Squats and 100 Sit-ups every single day",
+
+    "💻 Qaadashada casharro online ah",
+
+    "📚 Dib u eegis casharka jaamacadda",
+
+    "🌙 Seexashada waqti hore"
+
+];
+
+
+// LOAD LOCAL STORAGE
+
+function loadData() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(STORAGE_KEY) || "{}"
+        );
+
+    } catch {
+
+        return {};
+
+    }
+
+}
+
+let progress = loadData();
+
+
+// SAVE LOCAL STORAGE
+
+function saveData() {
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(progress)
+    );
+
+}
+
+
+// CREATE 90 DAYS
+
+function renderDays() {
+
+    const daysContainer = document.getElementById("days");
+
+    daysContainer.innerHTML = "";
+
+    for (let day = 1; day <= TOTAL_DAYS; day++) {
+
+        const card = document.createElement("div");
+
+        card.className = "day";
+
+        card.dataset.day = day;
+
+        const heading = document.createElement("h3");
+
+        heading.textContent = `📅 DAY ${day}`;
+
+        card.appendChild(heading);
+
+
+        // CREATE 9 CHECKBOXES
+
+        tasks.forEach(function(task, index) {
+
+            const label = document.createElement("label");
+
+            label.className = "task";
+
+            const checkbox = document.createElement("input");
+
+            checkbox.type = "checkbox";
+
+            checkbox.dataset.day = day;
+
+            checkbox.dataset.task = index;
+
+            // UNIQUE STORAGE KEY
+
+            const key = `${day}-${index}`;
+
+            checkbox.checked = Boolean(progress[key]);
+
+            const text = document.createElement("span");
+
+            text.textContent = task;
+
+            label.appendChild(checkbox);
+
+            label.appendChild(text);
+
+            card.appendChild(label);
+
+
+            // CHECKBOX EVENT
+
+            checkbox.addEventListener("change", function() {
+
+                progress[key] = checkbox.checked;
+
+                saveData();
+
+                updateDay(card, day);
+
+                updateStats();
+
+            });
+
+        });
+
+
+        // DAY STATUS
+
+        const status = document.createElement("span");
+
+        status.className = "day-status";
+
+        status.id = `status-${day}`;
+
+        card.appendChild(status);
+
+        daysContainer.appendChild(card);
+
+        updateDay(card, day);
+
+    }
+
+}
+
+
+// UPDATE DAY STATUS
+
+function updateDay(card, day) {
+
+    const checkboxes = card.querySelectorAll(
+        'input[type="checkbox"]'
+    );
+
+    const allCompleted = [...checkboxes].every(
+        checkbox => checkbox.checked
+    );
+
+    const status = card.querySelector(".day-status");
+
+    if (allCompleted) {
+
+        card.classList.add("done");
+
+        status.textContent = "Completed ✓ 🎉";
+
+    } else {
+
+        card.classList.remove("done");
+
+        const checkedCount = [...checkboxes].filter(
+            checkbox => checkbox.checked
+        ).length;
+
+        status.textContent =
+            `${checkedCount} / ${tasks.length} Tasks Completed`;
+
+    }
+
+}
+
+
+// UPDATE STATISTICS
+
+function updateStats() {
+
+    let completedCount = 0;
+
+    for (let day = 1; day <= TOTAL_DAYS; day++) {
+
+        const card = document.querySelector(
+            `.day[data-day="${day}"]`
+        );
+
+        if (!card) continue;
+
+        const checkboxes = card.querySelectorAll(
+            'input[type="checkbox"]'
+        );
+
+        const allCompleted = [...checkboxes].every(
+            checkbox => checkbox.checked
+        );
+
+        if (allCompleted) {
+            completedCount++;
+        }
+
+    }
+
+    const percent = Math.round(
+        (completedCount / TOTAL_DAYS) * 100
+    );
+
+    document.getElementById("completed").textContent =
+        completedCount;
+
+    document.getElementById("remaining").textContent =
+        TOTAL_DAYS - completedCount;
+
+    document.getElementById("percent").textContent =
+        percent + "%";
+
+    document.getElementById("progressText").textContent =
+        `${completedCount} / ${TOTAL_DAYS}`;
+
+    document.getElementById("progressFill").style.width =
+        percent + "%";
+
+}
+
+
+// RESET EVERYTHING
+
+document.getElementById("reset").addEventListener(
+    "click",
+    function() {
+
+        const confirmReset = confirm(
+            "Ma hubtaa inaad tirtirayso dhammaan progress-kaaga?"
+        );
+
+        if (confirmReset) {
+
+            progress = {};
+
+            localStorage.removeItem(STORAGE_KEY);
+
+            renderDays();
+
+            updateStats();
+
+        }
+
+    }
+);
+
+
+// START WEBSITE
+
+renderDays();
+
+updateStats();
+
+</script>
+
+</body>
+</html>
